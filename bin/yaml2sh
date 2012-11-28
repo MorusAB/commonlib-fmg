@@ -7,7 +7,8 @@ assignments in Bourne-shell format.
 """
 
 import optparse, sys, re, yaml
-
+reload(sys)
+sys.setdefaultencoding("utf-8")
 def die(message):
   print >>sys.stderr, "%s: %s" % (sys.argv[0], message)
   sys.exit(1)
@@ -19,7 +20,7 @@ def shell_quote(s):
   """Return a quoted string that will be interpreted by a Bourne-like shell
   as representing the string that was passed in.
   """
-  return "'" + re.sub(r"'", "'\\''", s) + "'"
+  return unicode("'" + re.sub(r"'", "'\\''", s) + "'",'utf-8')
 
 def process(fh=None, data=None, prefix=[], output_prefix=""):
   assert fh is not None or data is not None
