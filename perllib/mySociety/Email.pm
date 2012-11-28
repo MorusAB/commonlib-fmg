@@ -36,7 +36,6 @@ sub encode_string ($) {
 
     # Make sure we have an internal Unicode string
     utf8::decode($s);
-
     foreach my $encoding (qw(
                     us-ascii
                     iso-8859-1
@@ -193,7 +192,8 @@ sub do_template_substitution ($$) {
     local($Text::Wrap::columns) = 69;
     local($Text::Wrap::huge) = 'overflow';
     local($Text::Wrap::unexpand) = 0;
-    my $wrapped = Text::Wrap::wrap('     ', '     ', $body);
+    #my $wrapped = Text::Wrap::wrap('     ', '     ', $body); #rikard
+    my $wrapped = Text::Wrap::wrap('', '', $body); #rikard
     $wrapped =~ s/^\s+$//mg; # Do it again because of wordwrapping indented lines
 
     return ($subject, $wrapped);
